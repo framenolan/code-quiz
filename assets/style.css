@@ -74,7 +74,9 @@ form p {
 }
 
 .answerButton {
-
+    background-color: goldenrod;
+    padding: 5px;
+    margin: 10px;
 }
 
 .scorePage {

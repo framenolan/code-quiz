@@ -1,26 +1,73 @@
 var startGame = document.querySelector(".startButton");
-// var answerButton = document.querySelectorAll(".answerButton")
 var showHighscore = document.querySelector(".showLeaderboard")
 var viewHighscore = document.querySelector(".viewLeaderboard")
 var playAgain = document.querySelector(".playAgain")
 var startAgain = document.querySelector(".startAgain")
 
+var answerButton1 = document.querySelector("#answer1")
+var answerButton2 = document.querySelector("#answer2")
+var answerButton3 = document.querySelector("#answer3")
+var answerButton4 = document.querySelector("#answer4")
+var questionText = document.querySelector(".questionText")
+
 var instructionsPage = document.querySelector(".instructionsPage");
 var questionPage = document.querySelector(".questionPage");
-var leaderboardPage = document.querySelector(".leaderboardPage")
+var leaderboardPage = document.querySelector(".leaderboardPage");
 var scorePage = document.querySelector(".scorePage");
 
-var secondsLeft = 2
-var timeEl = document.querySelector("#countdownTimer")
+var secondsLeft = 30;
+var timeEl = document.querySelector("#countdownTimer");
 
-var score = 0
+var score = localStorage.getItem("score");
 
-flashcards()
+var question1 = ["What year did the Stonewall Riots happen?", "1972", "1965", "1969", "1975", "1965"]
+var question2 = ["Who was the first winner of RuPaul's Drag Race?", "Bebe Zahara Benet", "Tyra Sanchez", "Ongina", "Lady Bunny", "Bebe Zahara Benet"]
+var questionList = [question1, question2]
+
+var currentQuestion = question1[0]
+var currentQuestionArray = question1
+var correctAnswer = currentQuestion[6]
+
+console.log(currentQuestion)
+console.log(currentQuestionArray)
+
+
+// flashcards()
 
 function start() {
     startTime()
     instructionsPage.setAttribute("data-show", "hidden")
     questionPage.setAttribute("data-show", "show")
+    questionText.textContent = question1[0]
+    answerButton1.value = question1[1]
+    answerButton2.value = question1[2]
+    answerButton3.value = question1[3]
+    answerButton4.value = question1[4]
+    
+    var guess = document.querySelector(".questionPage")
+    var guessValue = guess.value
+    answerButton1.addEventListener("click",answerQuestion)
+    answerButton2.addEventListener("click",answerQuestion)
+    answerButton3.addEventListener("click",answerQuestion)
+    answerButton4.addEventListener("click",answerQuestion)
+    
+    answerQuestion(guessValue)
+    
+    console.log(currentQuestion)
+    console.log(currentQuestionArray)
+    newQuestion(questionList.indexOf(currentQuestionArray))
+    console.log(questionList.indexOf(currentQuestionArray))
+    console.log(currentQuestion)
+    console.log(currentQuestionArray)
+}
+
+function newQuestion(i) {
+    currentQuestion = questionList[i+1];
+    console.log(currentQuestion)
+    console.log(currentQuestionArray)
+    // currentQuestion = currentQuestionArray[0];
+    console.log(currentQuestion)
+    console.log(currentQuestionArray)
 }
 
 // When time runs out, page changes to scorePage
@@ -50,83 +97,93 @@ function startTime() {
         secondsLeft--;
         timeEl.textContent = secondsLeft
         
-        if(secondsLeft === 0) {
+        if(secondsLeft <= 0) {
             clearInterval(timerInterval);
             gameOver();
         }
     }, 1000)
+    return secondsLeft;
 }
 
-function answerQuestion() {
-    
+function answerQuestion(guessCheck) {
+    if (guessCheck == correctAnswer) {
+        score++;
+        localStorage.setItem("score", score);
+        newQuestion();
+    } else {
+        secondsLeft-5;
+        newQuestion();
+    }
     // Update .questionText textContent to a question
 
 }
 
-function flashcards() {
-    var arrayNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    var arrayOperators = ["-","+","*"]
+// function flashcards() {
+//     var arrayNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+//     var arrayOperators = ["-","+","*"]
     
-    function pullChar(array) {
-        varRandom = Math.floor(Math.random() * array.length)
-        currentChar = array[varRandom]
-        return(currentChar)
-    }
+//     function pullChar(array) {
+//         varRandom = Math.floor(Math.random() * array.length)
+//         currentChar = array[varRandom]
+//         return(currentChar)
+//     }
     
-    function doTheWrongMath() {
-        valueA = pullChar(arrayNum)
-        operator = pullChar(arrayOperators)
-        valueB = pullChar(arrayNum)
+//     function doTheWrongMath() {
+//         valueA = pullChar(arrayNum)
+//         operator = pullChar(arrayOperators)
+//         valueB = pullChar(arrayNum)
 
-        console.log(valueA,operator,valueB)
+//         console.log(valueA,operator,valueB)
         
-        answer = eval(valueA + operator + valueB)
-        console.log(answer)
-        return(answer)
-    }
+//         answer = eval(valueA + operator + valueB)
+//         console.log(answer)
+//         return(answer)
+//     }
 
-    // create array of possible answers
-    var possibleArray = [0]
-    for (let i = 0; i <= arrayNum.length; i++) {
-        var result = doTheWrongMath()
-        if (possibleArray.includes(result)) {
-        doTheWrongMath()
-        } else {
-        possibleArray.push(result)
-        console.log(possibleArray)
-        }
-    }
+//     // create array of possible answers
+//     var possibleArray = [0]
+//     for (let i = 0; i <= arrayNum.length; i++) {
+//         var result = doTheWrongMath()
+//         if (possibleArray.includes(result)) {
+//         doTheWrongMath()
+//         } else {
+//         possibleArray.push(result)
+//         console.log(possibleArray)
+//         }
+//     }
 
-    var wrongAnswer1 = pullChar(possibleArray)
-    var wrongAnswer2 = pullChar(possibleArray)
-    var wrongAnswer3 = pullChar(possibleArray)
+//     var wrongAnswer1 = pullChar(possibleArray)
+//     var wrongAnswer2 = pullChar(possibleArray)
+//     var wrongAnswer3 = pullChar(possibleArray)
 
-    // if (wrongAnswer1 !== wrongAnswer2) {
-    //     wrongAnswer2 = pullChar(possibleArray)
-    // } else {
-    //     return wrongAnswer3
-    // }
+//     // if (wrongAnswer1 !== wrongAnswer2) {
+//     //     wrongAnswer2 = pullChar(possibleArray)
+//     // } else {
+//     //     return wrongAnswer3
+//     // }
 
-    var wrongEl1 = document.querySelector("#answer2")
-    var wrongEl2 = document.querySelector("#answer3")
-    var wrongEl3 = document.querySelector("#answer4")
+//     var wrongEl1 = document.querySelector("#answer2")
+//     var wrongEl2 = document.querySelector("#answer3")
+//     var wrongEl3 = document.querySelector("#answer4")
 
-    wrongEl1.textContent = wrongAnswer1
-    wrongEl2.textContent = wrongAnswer2
-    wrongEl3.textContent = wrongAnswer3
+//     wrongEl1.textContent = wrongAnswer1
+//     wrongEl2.textContent = wrongAnswer2
+//     wrongEl3.textContent = wrongAnswer3
 
-    // chose 3 other answers out of possible array
+//     // chose 3 other answers out of possible array
 
-    // verify that chosen answers don't match real answer
+//     // verify that chosen answers don't match real answer
 
-    // update text content of answer buttons
-}
+//     // update text content of answer buttons
+// }
 
 //CREATE ARRAY LIST OF QUESTIONS
     //1)EACH QUESTION IS ITS OWN ARRAY
         //ARRAY[0] IS THE QUESTION
-        //ARRAY[1-4] ARE THE CHOICES
-        //ARRAY[5] IS THE CORRECT ANSWER
+        //ARRAY[1-6] ARE THE CHOICES
+        //ARRAY[6] IS THE CORRECT ANSWER
+
+
 
 
 viewHighscore.addEventListener("click", highscore)
@@ -140,6 +197,7 @@ showHighscore.addEventListener("click", highscore)
 // Leaderboard Page buttons
 startAgain.addEventListener("click", reset)
 
+// ...maybe setup a data attribute of right/wrong
 
 
 //     Timer starts counting when Start Game button is pushed
