@@ -9,25 +9,45 @@
 </head>
 <body>
     <header>
-        <h1 class="viewLeaderboard">View Scores</h1>
-        <h1 class="countdownTimer">Time Left: </h1>
+        <button class="viewLeaderboard">View Scores</button>
+        <div class="countdownLabel">Time Left: <span id="countdownTimer">--</span></div>
     </header>
 
     <main>
-        <section class="startGame">
+        <section class="instructionsPage" data-show="show">
+            <p>
+                Answer as many questions correctly as you can before time runs out. Answer incorrectly and time is subtracted. Your final score will be the number of correctly answered questions. Ready to play?
+            </p>
+            <button class="startButton">Start Game</button>
+        </section>
+
+        <section class="questionPage" data-show="hidden">
+            <p class="questionText">Question?</p>
+            <button class="answerButton" id="answer1">Answer 1</button>
+            <button class="answerButton" id="answer2">Answer 2</button>
+            <button class="answerButton" id="answer3">Answer 3</button>
+            <button class="answerButton" id="answer4">Answer 4</button>
+        </section>
+
+        <section class="scorePage" data-show="hidden">
+            <!-- <p>Your Score: <span id="scoreDisplay"></span></p> -->
+            <form>  
+                <label for="scoreName">Your Name: </label>
+                <input type="text" id="scoreName" name="scoreName"><br>
+                <label for="yourScore">Your Score: </label>
+                <p id="yourScore" name="YourScore"></p>
+            </form>
             
+            <button class="playAgain">Play Again?</button>
+            <button class="showLeaderboard">Leaderboard</button>
         </section>
+        
+        <section class="leaderboardPage" data-show="hidden">
+            <p>Leaderboard</p>
+            <ul class="">
 
-        <section class="question">
-            
-        </section>
-
-        <section class="showScore">
-
-        </section>
-
-        <section class="leaderboard">
-
+            </ul>
+            <button class="startAgain">Play Again?</button>
         </section>
 
     </main>
