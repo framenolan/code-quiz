@@ -9,7 +9,8 @@
 </head>
 <body>
     <header>
-        <button class="viewLeaderboard">View Scores</button>
+        <button class="viewLeaderboard">View Leaderboard</button>
+        <h1>Queer History Quiz</h1>
         <div class="countdownLabel">Time Left: <span id="countdownTimer">--</span></div>
     </header>
 
@@ -27,10 +28,10 @@
             <input class="answerButton" id="answer2" type="button" value="Answer"></input>
             <input class="answerButton" id="answer3" type="button" value="Answer"></input>
             <input class="answerButton" id="answer4" type="button" value="Answer"></input>
+            <p class="result"></p>
         </section>
 
         <section class="scorePage" data-show="hidden">
-            <!-- <p>Your Score: <span id="scoreDisplay"></span></p> -->
             <form>  
                 <label for="scoreName">Your Name: </label>
                 <input type="text" id="scoreName" name="scoreName"><br>
@@ -39,15 +40,16 @@
             </form>
             
             <button class="playAgain">Play Again?</button>
-            <button class="showLeaderboard">Leaderboard</button>
+            <button class="saveScore">Save Score</button> 
         </section>
         
         <section class="leaderboardPage" data-show="hidden">
-            <p>Leaderboard</p>
-            <ul class="">
+            <h2>Leaderboard</h2>
+            <ul class="rankings">
 
             </ul>
             <button class="startAgain">Play Again?</button>
+            <button class="clearLeaderboard">Delete Top Score</button>
         </section>
 
     </main>
