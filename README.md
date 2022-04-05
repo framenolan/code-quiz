@@ -41,3 +41,13 @@ I was not able to figure out how keep the leaderboard between sessions, but this
 I was not able to figure out how to rank the leaderboard by highest score to lowest score, but this was not a technical requirement.
 
 In my original approach, I attempted to randomly generate simple arithmetic questions and verify the answer, but it was getting too complicated and not in the technical requirements, so I pivoted to queer history questions in arrays instead.
+
+## Screenshots
+![image](https://user-images.githubusercontent.com/101062909/161665495-15577013-f9f8-4bb9-949c-f1a151148321.png)
+
+![image](https://user-images.githubusercontent.com/101062909/161665522-e63849ef-9b5b-487c-a4c5-3a595c263c8f.png)
+
+![image](https://user-images.githubusercontent.com/101062909/161665559-97def15e-b352-40e5-987f-edc01f031f9c.png)
+
+![image](https://user-images.githubusercontent.com/101062909/161665589-0f6cfc9f-eb5c-4af4-8fe1-50a3784cff5d.png)
+
